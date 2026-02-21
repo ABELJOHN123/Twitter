@@ -1,110 +1,47 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
+
+const authController = require("./controller/authController");
+const tweetController = require("./controller/tweetcontroller");
 
 dotenv.config();
 
 const app = express();
+
+// Middleware to parse JSON
 app.use(express.json());
 
-/* =========================
-   CONNECT TO DATABASE
-========================= */
-
+// Connect to MongoDB
+console.log(process.env.MONGO_URI)
 mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log("❌ DB Error:", err.message));
+  .then(() => console.log("✅ Database connected"))
+  .catch((err) => console.log("❌ DB Error:", err));
 
 
-/* =========================
-   USER MODEL
-========================= */
+// ----------------------
+// ROUTES
+// ----------------------
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String
+// Prefix auth routes
+app.post("/api/auth/signup", authController.signup);
+app.post("/api/auth/signin", authController.signin);
+
+// Tweet routes
+app.post("/api/tweet", tweetController.createTweet);
+app.get("/api/tweet/:userId", tweetController.getTweetsByUser);
+
+// Default route for testing server
+app.get("/", (req, res) => {
+  res.json({ success: true, message: "Server is running" });
 });
 
-const User = mongoose.model("User", userSchema);
-
-
-/* =========================
-   SIGN IN API
-========================= */
-
-app.post("/signin", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // 1️⃣ Check user exists
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
-
-    // 2️⃣ Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid password" });
-    }
-
-    // 3️⃣ Success
-    res.json({
-      success: true,
-      message: "Login successful"
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+// Handle unknown routes
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Route not found" });
 });
 
-/* =========================
-   SIGN UP API
-========================= */
-
-app.post("/signup", async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        message: "All fields are required"
-      });
-    }
-
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await User.create({
-      name,
-      email,
-      password: hashedPassword
-    });
-
-    res.status(201).json({
-      success: true,
-      message: "User registered successfully"
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-
-/* =========================
-   START SERVER
-========================= */
-
-const PORT = 3000;
-
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
