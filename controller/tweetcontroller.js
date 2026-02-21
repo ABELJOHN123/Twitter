@@ -40,8 +40,7 @@ exports.createTweet = async (req, res) => {
   }
 };
 
-
-/* =========================
+ /*====================
    GET TWEETS BY USER
 ========================= */
 exports.getTweetsByUser = async (req, res) => {
@@ -61,5 +60,33 @@ exports.getTweetsByUser = async (req, res) => {
       success: false,
       message: error.message
     });
+  }
+};
+
+
+ /*====================
+   RE-TWEET
+========================= */
+exports.retweet = async (req, res) => {
+  try {
+    const { tweetId } = req.params;
+
+    const tweet = await Tweet.findById(tweetId);
+
+    if (!tweet) {
+      return res.status(404).json({ message: "Tweet not found" });
+    }
+
+    tweet.retweetCount += 1;
+
+    await tweet.save();
+
+    res.status(200).json({
+      message: "Tweet retweeted successfully",
+      retweetCount: tweet.retweetCount
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

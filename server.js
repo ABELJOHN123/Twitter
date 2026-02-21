@@ -31,6 +31,9 @@ app.post("/api/auth/signin", authController.signin);
 app.post("/api/tweet", tweetController.createTweet);
 app.get("/api/tweet/:userId", tweetController.getTweetsByUser);
 
+// RETWEET routes
+app.get("/api/tweet/:tweetId/retweet", tweetController.retweet);
+
 // Default route for testing server
 app.get("/", (req, res) => {
   res.json({ success: true, message: "Server is running" });
