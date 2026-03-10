@@ -30,31 +30,6 @@ Version Control: Git & GitHub
 
 --------------------------------------------------
 
-Project Structure
-
-twitter-project
-|
-|-- controllers
-|     tweetController.js
-|
-|-- models
-|     User.js
-|     Tweet.js
-|
-|-- routes
-|     authRoutes.js
-|     tweetRoutes.js
-|
-|-- middleware
-|     authMiddleware.js
-|
-|-- config
-|     db.js
-|
-|-- server.js
-|-- package.json
-
---------------------------------------------------
 
 API Endpoints
 
