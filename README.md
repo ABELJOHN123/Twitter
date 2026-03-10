@@ -1,96 +1,130 @@
+# Twitter Clone Backend API
 
-.
+This project is a backend REST API for a Twitter-like social media application. It allows users to register, login, create tweets, like tweets, and manage their posts. The system is built using Node.js, Express.js, and MongoDB with JWT authentication for security.
 
-🐦 Twitter Clone API (Backend)
+The project demonstrates backend development concepts such as API design, authentication, database integration, and CRUD operations.
 
-A backend REST API for a Twitter-like social media platform where users can register, login, create tweets, like posts, and interact with other users.
-The project is built using Node.js, Express, and MongoDB with secure authentication.
+--------------------------------------------------
 
-🚀 Features
+Features
 
-User Registration and Login
+• User Registration  
+• User Login with JWT Authentication  
+• Secure API Endpoints using Middleware  
+• Create Tweet  
+• View All Tweets  
+• Delete Tweet  
+• Like and Unlike Tweets  
+• MongoDB Database Integration  
+• RESTful API Architecture  
 
-JWT Authentication
+--------------------------------------------------
 
-Create, Read, Update, and Delete Tweets
+Tech Stack
 
-Like and Unlike Tweets
+Backend: Node.js, Express.js  
+Database: MongoDB  
+Authentication: JSON Web Token (JWT)  
+Testing: Postman  
+Version Control: Git & GitHub  
 
-User Profile Management
+--------------------------------------------------
 
-Secure API Endpoints
+Project Structure
 
-MongoDB Database Integration
+twitter-project
+|
+|-- controllers
+|     tweetController.js
+|
+|-- models
+|     User.js
+|     Tweet.js
+|
+|-- routes
+|     authRoutes.js
+|     tweetRoutes.js
+|
+|-- middleware
+|     authMiddleware.js
+|
+|-- config
+|     db.js
+|
+|-- server.js
+|-- package.json
 
-🛠️ Tech Stack
+--------------------------------------------------
 
-Backend: Node.js, Express.js
+API Endpoints
 
-Database: MongoDB
+Authentication
 
-Authentication: JSON Web Token (JWT)
+POST /api/auth/register  
+Register a new user
 
-API Testing: Postman
+POST /api/auth/login  
+Login user and receive JWT token
 
-Version Control: Git & GitHub
+Tweets
 
-📂 Project Structure
-twitter-api
-│
-├── controllers
-│   └── tweetController.js
-│
-├── models
-│   └── Tweet.js
-│   └── User.js
-│
-├── routes
-│   └── tweetRoutes.js
-│   └── authRoutes.js
-│
-├── middleware
-│   └── authMiddleware.js
-│
-├── config
-│   └── db.js
-│
-├── server.js
-└── package.json
-⚙️ Installation
+POST /api/tweets  
+Create a new tweet
 
-1️⃣ Clone the repository
+GET /api/tweets  
+Get all tweets
 
-git clone https://github.com/yourusername/twitter-api.git
+DELETE /api/tweets/:id  
+Delete a tweet
 
-2️⃣ Install dependencies
+POST /api/tweets/:id/like  
+Like or unlike a tweet
+
+--------------------------------------------------
+
+Authentication
+
+Protected routes require a JWT token.
+
+Example Header:
+
+Authorization: Bearer <your_token>
+
+--------------------------------------------------
+
+How to Run the Project
+
+1. Clone the repository
+
+git clone https://github.com/yourusername/twitter-project.git
+
+2. Install dependencies
 
 npm install
 
-3️⃣ Start the server
+3. Start the server
 
 npm start
 
 Server runs on:
-
 http://localhost:5000
-📌 API Endpoints
-Authentication
-Method	Endpoint	Description
-POST	/api/auth/register	Register a new user
-POST	/api/auth/login	Login user
-Tweets
-Method	Endpoint	Description
-POST	/api/tweets	Create a tweet
-GET	/api/tweets	Get all tweets
-DELETE	/api/tweets/:id	Delete a tweet
-POST	/api/tweets/:id/like	Like a tweet
-🔒 Authentication
 
-Protected routes use JWT token authentication.
+--------------------------------------------------
 
-Example header:
+What I Learned from This Project
 
-Authorization: Bearer <token>
-📬 API Testing
+• Building REST APIs using Node.js and Express  
+• Implementing JWT authentication  
+• Creating secure backend routes  
+• Connecting Node.js with MongoDB  
+• Handling CRUD operations  
+• Structuring backend applications properly  
 
-All endpoints were tested using Postman to ensure proper request and response handling.
+--------------------------------------------------
+
+Author
+
+Abel John  
+Frontend and Backend Developer  
+
+Skills: React, Node.js, Python, HTML, CSS, JavaScript
