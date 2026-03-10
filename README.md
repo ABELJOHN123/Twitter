@@ -1,90 +1,96 @@
-# Twitter Clone API 🚀
 
-A simple Twitter-like REST API built using:
+.
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- JWT Authentication
-- bcrypt
+🐦 Twitter Clone API (Backend)
 
----
+A backend REST API for a Twitter-like social media platform where users can register, login, create tweets, like posts, and interact with other users.
+The project is built using Node.js, Express, and MongoDB with secure authentication.
 
-## 📌 Features
+🚀 Features
 
-- User Signup
-- User Signin
-- Password Hashing
-- JWT Authentication
+User Registration and Login
 
----
+JWT Authentication
 
-## 🛠 Installation
+Create, Read, Update, and Delete Tweets
 
-### 1️⃣ Clone the repository
+Like and Unlike Tweets
 
-git clone https://github.com/ABELJOHN123/Twitter.git
+User Profile Management
 
-### 2️⃣ Go into the project folder
+Secure API Endpoints
 
-cd Twitter
+MongoDB Database Integration
 
-### 3️⃣ Install dependencies
+🛠️ Tech Stack
+
+Backend: Node.js, Express.js
+
+Database: MongoDB
+
+Authentication: JSON Web Token (JWT)
+
+API Testing: Postman
+
+Version Control: Git & GitHub
+
+📂 Project Structure
+twitter-api
+│
+├── controllers
+│   └── tweetController.js
+│
+├── models
+│   └── Tweet.js
+│   └── User.js
+│
+├── routes
+│   └── tweetRoutes.js
+│   └── authRoutes.js
+│
+├── middleware
+│   └── authMiddleware.js
+│
+├── config
+│   └── db.js
+│
+├── server.js
+└── package.json
+⚙️ Installation
+
+1️⃣ Clone the repository
+
+git clone https://github.com/yourusername/twitter-api.git
+
+2️⃣ Install dependencies
 
 npm install
 
-### 4️⃣ Create a .env file in the root folder
+3️⃣ Start the server
 
-Add:
+npm start
 
-MONGO_URI=your_mongodb_connection_string  
-JWT_SECRET=your_secret_key
+Server runs on:
 
-### 5️⃣ Start the server
+http://localhost:5000
+📌 API Endpoints
+Authentication
+Method	Endpoint	Description
+POST	/api/auth/register	Register a new user
+POST	/api/auth/login	Login user
+Tweets
+Method	Endpoint	Description
+POST	/api/tweets	Create a tweet
+GET	/api/tweets	Get all tweets
+DELETE	/api/tweets/:id	Delete a tweet
+POST	/api/tweets/:id/like	Like a tweet
+🔒 Authentication
 
-node server.js
+Protected routes use JWT token authentication.
 
-Server will run on:
+Example header:
 
-http://localhost:3000
+Authorization: Bearer <token>
+📬 API Testing
 
----
-
-## 📡 API Endpoints
-
-### ➤ Signup
-POST /signup
-
-Body (JSON):
-{
-  "name": "Abel",
-  "email": "abel@gmail.com",
-  "password": "123456"
-}
-
----
-
-### ➤ Signin
-POST /signin
-
-Body (JSON):
-{
-  "email": "abel@gmail.com",
-  "password": "123456"
-}
-
----
-
-## 📂 Project Structure
-
-config/  
-controller/  
-model/  
-server.js  
-
----
-
-## 👨‍💻 Author
-
-Abel John
+All endpoints were tested using Postman to ensure proper request and response handling.
